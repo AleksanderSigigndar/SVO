@@ -1,0 +1,113 @@
+.allCoursesPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: 120px 0 80px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 200px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.pageHeader h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.pageHeader p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.coursesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+  align-items: start;
+  margin-top: 100px; 
+  gap: 6rem 2rem;
+  margin-bottom: 4rem;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  padding: 3rem;
+  grid-column: 1 / -1;
+}
+
+.loadMoreSection {
+  text-align: center;
+  margin-top: 6rem;
+  padding: 2rem 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.loadMoreBtn {
+  padding: 1rem 2rem;
+  background: #c494ff;
+  border: 2px solid #c494ff;
+  color: white;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 300px;
+}
+
+.loadMoreBtn:hover:not(:disabled) {
+  background: white;
+  color: #c494ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 108, 255, 0.4);
+}
+
+.loadMoreBtn:active:not(:disabled) {
+  background: #c494ff;
+  color: white;
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.loadMoreBtn:disabled {
+  background: white;
+  color: #c494ff;
+  transform: none;
+  box-shadow: none;
+}
+
+.allCoursesLoaded {
+  text-align: center;
+  padding: 2rem;
+  background: #e8f5e8;
+  border-radius: 8px;
+  margin: 2rem 0;
+  grid-column: 1 / -1;
+}
+
+.allCoursesLoaded p {
+  font-size: 1.2rem;
+  color: #2d5016;
+  margin: 0;
+  font-weight: 600;
+}

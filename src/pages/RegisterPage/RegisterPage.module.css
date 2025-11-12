@@ -1,0 +1,133 @@
+.registerPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: 120px 0 80px;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 20px;
+}
+
+.formContainer {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formContainer h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.error {
+  background: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ffcdd2;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-weight: 600;
+  color: #333;
+}
+
+.formGroup input {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.formGroup input:focus {
+  outline: none;  
+  border-color: #c494ff;
+}
+
+.submitBtn {
+  padding: 1rem;
+  background: #c494ff;
+  border: 2px solid #c494ff;
+  color: white;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: white;
+  color: #c494ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 108, 255, 0.4);
+}
+
+.submitBtn:active:not(:disabled) {
+  background: #c494ff;
+  color: white;
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+
+.submitBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.loginLink {
+  text-align: center;
+  margin-top: 2rem;
+  color: #666;
+}
+
+.loginLink a {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.loginLink a:hover {
+  text-decoration: none;
+  color: #c494ff;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 100px 0 60px;
+  }
+
+  .formContainer {
+    padding: 2rem 1.5rem;
+  }
+}

@@ -1,0 +1,108 @@
+.hero {
+  background: linear-gradient(135deg, #ead9ff 0%, #d981ff 100%);  color: white;
+  padding: 120px 0 80px;
+  margin-top: 80px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.heroContent {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.btnPrimary, .btnSecondary {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnPrimary {
+  background: #dd9afa;
+  color: white;
+}
+
+.btnSecondary {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btnPrimary:hover {
+  background: #f5fffc;
+  color:#c494ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
+}
+
+.btnPrimary:active {
+  background: #c494ff;
+  color:#f5fffc;
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.btnSecondary:hover {
+  background: #f5fffc;
+  color:#c494ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
+}
+
+.btnSecondary:active {
+  background: transparent;
+  color: white;
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.heroStats {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.statText {
+  font-size: 1rem;
+  opacity: 0.9;
+}

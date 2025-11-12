@@ -1,0 +1,81 @@
+.reviewCard {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reviewCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reviewerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reviewerName {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.course {
+  font-size: 0.9rem;
+  color: #2c5aa0;
+  background: #e3f2fd;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  align-self: flex-start;
+}
+
+.reviewMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.rating {
+  font-size: 1.1rem;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.reviewText {
+  line-height: 1.6;
+  color: #333;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .reviewCard {
+    padding: 1.5rem;
+  }
+
+  .reviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reviewMeta {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
