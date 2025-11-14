@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useSmoothScroll } from '../../hooks/useSmoothScroll.js';
 import s from './Head.module.css'
@@ -8,6 +8,9 @@ const Head = () => {
   const { currentUser, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
   const scrollToElement = useSmoothScroll();
+  const location = useLocation();
+
+  const isHomePage = location.pathname === '/';
 
   const scrollToFeatures = () => {
     scrollToElement('features', 100);
@@ -39,21 +42,25 @@ const Head = () => {
           </div>
         </Link>
         <nav className={s.nav}>
+          {isHomePage && (
+            <>
           <button to="/courses" className={s.navButton} onClick={scrollToCourses}>
             Курсы
           </button>
-          <button to="/reviews" className={s.navButton} onClick={goToReviews}>
-            Отзывы
-          </button>
           <button className={s.navButton} onClick={scrollToFeatures}>
             Преимущества
+          </button>
+          </>
+          )}
+          <button to="/reviews" className={s.navButton} onClick={goToReviews}>
+            Отзывы
           </button>
           
           {currentUser ? (
             <>
               {isAdmin && (
                 <Link to="/admin" className={s.navLink}>
-                  Админ-панель
+                  Админ Панель
                 </Link>
               )}
               <Link to="/profile" className={s.navLink}>

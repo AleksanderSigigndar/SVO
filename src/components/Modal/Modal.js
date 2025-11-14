@@ -26,7 +26,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     <div className={s.modalOverlay} onClick={onClose}>
       <div className={s.modalContent} onClick={(e) => e.stopPropagation()}>
         <button className={s.closeButton} onClick={onClose} aria-label="Закрыть">
-          Закрыть
+          ×
         </button>
         <div className={s.modalBody}>
           {children}

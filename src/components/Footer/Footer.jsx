@@ -19,7 +19,6 @@ const Footer = () => {
             <h4>Быстрые ссылки</h4>
             <a href="#courses">Все курсы</a>
             <a href="#features">О платформе</a>
-            <a href="#login">Вход</a>
           </div>
         </div>
         <div className={s.footerBottom}>

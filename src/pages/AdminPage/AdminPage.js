@@ -111,7 +111,7 @@ const AdminPage = () => {
                         )}
                       </div>
                       <div className={styles.reviewMeta}>
-                        <span className={styles.rating}>⭐ {review.rating}/5</span>
+                        <span className={styles.rating}>☆ {review.rating}/5</span>
                         <span className={styles.date}>
                           {review.createdAt?.toDate().toLocaleDateString('ru-RU')}
                         </span>
@@ -128,13 +128,13 @@ const AdminPage = () => {
                           className={styles.approveBtn}
                           onClick={() => approveReview(review.id)}
                         >
-                          ✅ Одобрить
+                          Одобрить
                         </button>
                         <button 
                           className={styles.rejectBtn}
                           onClick={() => rejectReview(review.id)}
                         >
-                          ❌ Удалить
+                          Удалить
                         </button>
                       </div>
                     )}
@@ -145,7 +145,7 @@ const AdminPage = () => {
                           className={styles.rejectBtn}
                           onClick={() => rejectReview(review.id)}
                         >
-                          🗑️ Удалить
+                          Удалить
                         </button>
                       </div>
                     )}

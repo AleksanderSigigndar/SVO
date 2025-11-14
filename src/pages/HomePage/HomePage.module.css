@@ -1,5 +1,9 @@
 .homePage {
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6;
-  color: #333;
+  font-family: 'Inter', 'Arial', sans-serif;
+  line-height: 1.7;
+  color: #2d1b47;
+  background: linear-gradient(135deg, #f8f4ff 0%, #f0e6ff 50%, #f8f4ff 100%);
+  background-size: 400% 400%;
+  animation: gentleGradient 8s ease infinite;
+  min-height: 100vh;
 }

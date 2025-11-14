@@ -13,7 +13,11 @@ const ReviewCard = ({ review }) => {
   };
 
   const renderStars = (rating) => {
-    return '⭐'.repeat(rating);
+    return '☆'.repeat(rating);
+  };
+  
+  const formatLongWords = (text) => {
+    return text.replace(/([^\s]{20})/g, '$1 '); // Добавляет пробел после каждых 20 символов без пробелов
   };
 
   const displayName = review.isAnonymous 
@@ -35,7 +39,7 @@ const ReviewCard = ({ review }) => {
         </div>
       </div>
       <div className={styles.reviewText}>
-        {review.text}
+         {formatLongWords(review.text)}
       </div>
     </div>
   );

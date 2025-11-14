@@ -89,12 +89,14 @@
 .formGroup select:focus,
 .formGroup textarea:focus {
   outline: none;
-  border-color: #2c5aa0;
+  border-color: #c494ff;
 }
 
 .formGroup textarea {
   resize: vertical;
   min-height: 120px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .charCount {
@@ -112,9 +114,9 @@
 
 .cancelBtn {
   padding: 0.75rem 1.5rem;
-  background: #6c757d;
+  background: #c494ff;
+  border: 2px solid #c494ff;
   color: white;
-  border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -122,14 +124,24 @@
 }
 
 .cancelBtn:hover {
-  background: #545b62;
+  color: #c494ff;
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 108, 255, 0.4);
+}
+
+.cancelBtn:active {
+  background: #c494ff;
+  color: white;
+  transform: translateY(2px);
+  box-shadow: none;
 }
 
 .submitBtn {
   padding: 0.75rem 1.5rem;
-  background: #2c5aa0;
+  background: #c494ff;
+  border: 2px solid #c494ff;
   color: white;
-  border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -137,12 +149,24 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: #1e3d6f;
+  color: #c494ff;
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 108, 255, 0.4);
+}
+
+.submitBtn:active:not(:disabled) {
+  background: #c494ff;
+  color: white;
+  transform: translateY(2px);
+  box-shadow: none;
 }
 
 .submitBtn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+  background: #c494ff;
+  color: white;
+  transform: translateY(2px);
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {

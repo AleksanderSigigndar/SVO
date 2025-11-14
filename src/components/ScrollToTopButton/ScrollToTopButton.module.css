@@ -1,52 +1,184 @@
 .scrollToTop {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 150px;
-  height: 50px;
-  border: 2px solid #c494ff;
-  border-radius: 30px;
-  background: #c494ff;
+  bottom: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ead9ff 0%, #d981ff 50%, #c494ff 100%);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(226, 108, 255, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 
+    0 8px 25px rgba(196, 148, 255, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
+  transform: translateY(20px) scale(0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.scrollToTop::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, #ead9ff, #d981ff, #c494ff);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.4s ease;
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.scrollToTop::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .scrollToTop.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .scrollToTop:hover {
-  background: white;
+  background: linear-gradient(135deg, #ffffff 0%, #f0e6ff 50%, #ead9ff 100%);
   color: #c494ff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(226, 108, 255, 0.8);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 
+    0 15px 35px rgba(196, 148, 255, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.scrollToTop:hover::before {
+  opacity: 0.3;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+}
+
+.scrollToTop:hover::after {
+  opacity: 1;
 }
 
 .scrollToTop:active {
-  background: #c494ff;
+  background: linear-gradient(135deg, #c494ff 0%, #d981ff 50%, #ead9ff 100%);
   color: white;
-  transform: translateY(2px);
-  box-shadow: none;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 
+    0 5px 20px rgba(196, 148, 255, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.scrollToTop i {
+  transition: transform 0.3s ease;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.scrollToTop:hover i {
+  transform: translateY(-2px);
+}
+
+.scrollToTop:active i {
+  transform: translateY(1px);
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.3);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-10px) scale(1.1);
+  }
+  70% {
+    transform: translateY(5px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+.scrollToTop {
+  transition: 
+    opacity 0.5s ease,
+    visibility 0.5s ease,
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (max-width: 768px) {
   .scrollToTop {
+    bottom: 25px;
+    right: 25px;
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+  }
+  
+  .scrollToTop:hover {
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .scrollToTop {
     bottom: 20px;
     right: 20px;
-    width: 45px;
-    height: 45px;
-    font-size: 1.3rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+  
+  .scrollToTop::before {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollToTop,
+  .scrollToTop::before,
+  .scrollToTop i {
+    animation: none !important;
+    transition: opacity 0.3s ease, visibility 0.3s ease !important;
+  }
+  
+  .scrollToTop:hover {
+    transform: translateY(-2px) !important;
   }
 }

@@ -13,12 +13,11 @@ const ReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const q = query(
       collection(db, 'reviews'),
-      where('isApproved', '==', true),
-      orderBy('createdAt', 'desc')
+      where('isApproved', '==', true)
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

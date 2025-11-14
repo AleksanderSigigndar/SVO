@@ -60,7 +60,7 @@ const ReviewForm = ({ onClose }) => {
         rating: parseInt(formData.rating),
         text: formData.text.trim(),
         course: formData.course.trim(),
-        isApproved: false, // Требует подтверждения админа
+        isApproved: false, 
         createdAt: new Date(),
         updatedAt: new Date()
       });
@@ -154,11 +154,11 @@ const ReviewForm = ({ onClose }) => {
             onChange={handleChange}
             required
           >
-            <option value="5">⭐️⭐️⭐️⭐️⭐️ (5)</option>
-            <option value="4">⭐️⭐️⭐️⭐️ (4)</option>
-            <option value="3">⭐️⭐️⭐️ (3)</option>
-            <option value="2">⭐️⭐️ (2)</option>
-            <option value="1">⭐️ (1)</option>
+            <option value="5">☆☆☆☆☆ (5)</option>
+            <option value="4">☆☆☆☆ (4)</option>
+            <option value="3">☆☆☆ (3)</option>
+            <option value="2">☆☆ (2)</option>
+            <option value="1">☆ (1)</option>
           </select>
         </div>
 

@@ -18,7 +18,6 @@ const Hero = () => {
           </p>
           <div className={s.heroButtons}>
             <button className={s.btnPrimary} onClick={goToAllCourses}>Выбрать курс</button>
-            <button className={s.btnSecondary}>Подать заявку</button>
           </div>
           <div className={s.heroStats}>
             <div className={s.stat}>
