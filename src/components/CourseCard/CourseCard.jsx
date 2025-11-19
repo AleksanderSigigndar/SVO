@@ -24,7 +24,7 @@ const CourseCard = ({ course }) => {
         <span className={s.students}>👥 {course.students}</span>
       </div>
       <div className={s.coursePrice}>{course.price}/мес.</div>
-      <button className={s.btnCourse} onClick={openModal}>Подробнее</button>
+      <button className={s.btnCourse} onClick={openModal}>Подать заявку</button>
     </div>
     
 
