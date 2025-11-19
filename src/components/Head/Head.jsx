@@ -75,7 +75,7 @@ const Head = () => {
               <Link to="/login" className={s.loginBtn}>
                 Войти
               </Link>
-              <Link to="/register" className={s.registerBtn}>
+              <Link to="/register" className={s.loginBtn}>
                 Регистрация
               </Link>
             </>

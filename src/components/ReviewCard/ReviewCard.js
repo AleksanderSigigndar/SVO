@@ -17,7 +17,7 @@ const ReviewCard = ({ review }) => {
   };
   
   const formatLongWords = (text) => {
-    return text.replace(/([^\s]{20})/g, '$1 '); // Добавляет пробел после каждых 20 символов без пробелов
+    return text.replace(/([^\s]{20})/g, '$1 ');
   };
 
   const displayName = review.isAnonymous 
