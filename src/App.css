@@ -9,7 +9,6 @@
   overflow-x: hidden;
 }
 
-/* Animated background elements */
 .App::before {
   content: '';
   position: fixed;
@@ -49,7 +48,6 @@
   z-index: 1;
 }
 
-/* Typography with animations */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Arial', sans-serif;
   line-height: 1.2;
@@ -256,7 +254,7 @@ p {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 2px;
 }
 
 ::-webkit-scrollbar-track {
@@ -288,6 +286,10 @@ p {
 
 html {
   scroll-behavior: smooth;
+}
+body {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 @media print {

@@ -9,28 +9,54 @@ const Hero = () => {
   };
   return (
     <section className={s.hero}>
+      <div className={s.geometricBackground}>
+        <div className={s.geometricShape1}></div>
+        <div className={s.geometricShape2}></div>
+        <div className={s.geometricShape3}></div>
+        <div className={s.floatingOrbs}>
+          <div className={s.orb}></div>
+          <div className={s.orb}></div>
+          <div className={s.orb}></div>
+        </div>
+      </div>
       <div className={s.container}>
         <div className={s.heroContent}>
-          <h1>Дополнительное профессиональное образование</h1>
-          <p>
-            Получите востребованную профессию или повысьте квалификацию 
-            на онлайн-курсах от ведущих преподавателей
+          <div className={s.badge}>
+            <span>Премиум образование</span>
+          </div>
+          <h1>
+            <span className={s.titleLine1}>Профессиональный</span>
+            <span className={s.titleLine2}>рост начинается</span>
+            <span className={s.titleLine3}>здесь</span>
+          </h1>
+          <p className={s.subtitle}>
+            Трансформируйте свою карьеру с помощью экспертных знаний 
+            и практических навыков от лидеров индустрии
           </p>
           <div className={s.heroButtons}>
-            <button className={s.btnPrimary} onClick={goToAllCourses}>Выбрать курс</button>
+            <button className={s.ctaButton} onClick={goToAllCourses}>
+              <span className={s.buttonText}>Начать обучение</span>
+              <span className={s.buttonIcon}>→</span>
+            </button>
           </div>
-          <div className={s.heroStats}>
-            <div className={s.stat}>
-              <span className={s.statNumber}>50+</span>
-              <span className={s.statText}>Курсов</span>
+          <div className={s.statsGrid}>
+            <div className={s.statCard}>
+              <div className={s.statContent}>
+                <span className={s.statNumber}>50+</span>
+                <span className={s.statLabel}>Премиум курсов</span>
+              </div>
             </div>
-            <div className={s.stat}>
-              <span className={s.statNumber}>8000+</span>
-              <span className={s.statText}>Выпускников</span>
+            <div className={s.statCard}>
+              <div className={s.statContent}>
+                <span className={s.statNumber}>8000+</span>
+                <span className={s.statLabel}>Успешных выпускников</span>
+              </div>
             </div>
-            <div className={s.stat}>
-              <span className={s.statNumber}>98%</span>
-              <span className={s.statText}>Довольных студентов</span>
+            <div className={s.statCard}>
+              <div className={s.statContent}>
+                <span className={s.statNumber}>98%</span>
+                <span className={s.statLabel}>Положительных отзывов</span>
+              </div>
             </div>
           </div>
         </div>

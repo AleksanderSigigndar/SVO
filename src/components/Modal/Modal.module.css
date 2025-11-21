@@ -4,64 +4,82 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(26, 11, 46, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
   opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
-  backdrop-filter: blur(5px);
+  animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 20px;
 }
 
 .modalContent {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 2.5rem;
-  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(45, 27, 78, 0.95), rgba(61, 42, 94, 0.9));
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  padding: 3rem;
+  border-radius: 28px;
   box-shadow: 
-    0 20px 50px rgba(196, 148, 255, 0.3),
-    0 8px 25px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  width: 90%;
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 15px 35px rgba(196, 148, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  max-width: 480px;
+  width: 100%;
   position: relative;
-  transform: translateY(-50px);
-  animation: slideIn 0.3s ease 0.1s forwards;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform: translateY(-60px) scale(0.95);
+  animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  border: 1px solid rgba(221, 154, 250, 0.2);
+  overflow: hidden;
 }
 
 .modalContent::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(135deg, #ead9ff, #d981ff, #c494ff);
-  border-radius: 26px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(221, 154, 250, 0.4), transparent);
+}
+
+.modalContent::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(221, 154, 250, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(196, 148, 255, 0.05) 0%, transparent 50%);
+  animation: modalBgRotate 20s linear infinite;
+  pointer-events: none;
   z-index: -1;
-  opacity: 0.3;
 }
 
 .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: linear-gradient(135deg, #c494ff, #d981ff);
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: linear-gradient(135deg, rgba(221, 154, 250, 0.2), rgba(196, 148, 255, 0.1));
+  border: 1px solid rgba(221, 154, 250, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 1.2rem;
-  font-weight: bold;
-  box-shadow: 0 4px 15px rgba(196, 148, 255, 0.4);
+  font-size: 1.3rem;
+  font-weight: 300;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .closeButton::before {
@@ -71,7 +89,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.6s;
   border-radius: 50%;
 }
@@ -81,26 +99,156 @@
 }
 
 .closeButton:hover {
-  background: linear-gradient(135deg, #d981ff, #c494ff);
+  background: linear-gradient(135deg, rgba(221, 154, 250, 0.3), rgba(196, 148, 255, 0.2));
+  border-color: rgba(221, 154, 250, 0.5);
+  color: #ffffff;
   transform: translateY(-2px) scale(1.1);
-  box-shadow: 0 8px 25px rgba(196, 148, 255, 0.6);
+  box-shadow: 0 8px 25px rgba(196, 148, 255, 0.3);
 }
 
 .closeButton:active {
   transform: translateY(0) scale(1);
-  box-shadow: 0 2px 10px rgba(196, 148, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(196, 148, 255, 0.2);
+}
+
+.modalHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.modalTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff, #dd9afa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.modalSubtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 .modalBody {
-  padding: 1rem 0;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #2d1b47;
+  padding: 1.5rem 0;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
   text-align: center;
+  font-weight: 400;
+}
+
+.contactInfo {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.phoneNumber {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #dd9afa, #c494ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.contactNote {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
 }
 
-@keyframes fadeIn {
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.primaryAction {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #dd9afa, #c494ff);
+  border: none;
+  border-radius: 14px;
+  color: #1a0b2e;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(196, 148, 255, 0.3);
+}
+
+.primaryAction::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.primaryAction:hover::before {
+  left: 100%;
+}
+
+.primaryAction:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(196, 148, 255, 0.5);
+}
+
+.secondaryAction {
+  padding: 1rem 2rem;
+  background: transparent;
+  border: 1px solid rgba(221, 154, 250, 0.4);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.secondaryAction::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(221, 154, 250, 0.1), transparent);
+  transition: left 0.6s;
+}
+
+.secondaryAction:hover::before {
+  left: 100%;
+}
+
+.secondaryAction:hover {
+  background: rgba(221, 154, 250, 0.1);
+  border-color: rgba(221, 154, 250, 0.6);
+  transform: translateY(-2px);
+}
+
+@keyframes modalFadeIn {
   from {
     opacity: 0;
   }
@@ -109,48 +257,121 @@
   }
 }
 
-@keyframes slideIn {
+@keyframes modalSlideIn {
   from {
-    transform: translateY(-50px);
+    transform: translateY(-60px) scale(0.95);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
+
+@keyframes modalBgRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes modalContentAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalHeader,
+.modalBody,
+.contactInfo,
+.modalActions {
+  opacity: 0;
+  animation: modalContentAppear 0.6s ease-out forwards;
+}
+
+.modalHeader { animation-delay: 0.2s; }
+.modalBody { animation-delay: 0.3s; }
+.contactInfo { animation-delay: 0.4s; }
+.modalActions { animation-delay: 0.5s; }
 
 @media (max-width: 768px) {
+  .modalOverlay {
+    padding: 15px;
+    backdrop-filter: blur(10px);
+  }
+  
   .modalContent {
-    padding: 2rem 1.5rem;
-    margin: 1rem;
-    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+  }
+  
+  .modalTitle {
+    font-size: 1.8rem;
   }
   
   .modalBody {
-    font-size: 1.1rem;
-    padding: 0.5rem 0;
+    font-size: 1rem;
+    padding: 1rem 0;
+  }
+  
+  .phoneNumber {
+    font-size: 1.6rem;
   }
   
   .closeButton {
-    top: 0.8rem;
-    right: 0.8rem;
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .modalActions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .primaryAction,
+  .secondaryAction {
+    padding: 0.9rem 1.5rem;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .modalContent {
-    padding: 1.5rem 1rem;
-    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .modalTitle {
+    font-size: 1.6rem;
+  }
+  
+  .modalSubtitle {
+    font-size: 1rem;
+  }
+  
+  .phoneNumber {
+    font-size: 1.4rem;
+  }
+  
+  .contactInfo {
+    padding: 1.2rem;
   }
   
   .closeButton {
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 32px;
-    height: 32px;
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
 }
