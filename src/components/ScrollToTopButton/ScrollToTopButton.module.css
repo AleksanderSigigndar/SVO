@@ -182,7 +182,6 @@
   }
 }
 
-/* Поддержка reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .scrollToTop,
   .scrollToTop.visible,
@@ -204,7 +203,6 @@
   }
 }
 
-/* Темная тема для разных состояний */
 .scrollToTop:focus {
   outline: none;
   border-color: rgba(221, 154, 250, 0.5);
@@ -220,7 +218,6 @@
     0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Плавное появление/исчезновение */
 .scrollToTop:not(.visible) {
   transition: 
     opacity 0.3s ease,
