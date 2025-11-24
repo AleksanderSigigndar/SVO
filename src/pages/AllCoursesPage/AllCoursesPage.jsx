@@ -48,15 +48,29 @@ const AllCoursesPage = () => {
       <Head/>
       
       <main className={s.main}>
+        <div className={s.backgroundElements}>
+          <div className={s.geometricShape}></div>
+          <div className={s.geometricShape}></div>
+          <div className={s.floatingElement}></div>
+        </div>
         <div className={s.container}>
           <div className={s.pageHeader}>
-            <h1>Все курсы</h1>
-            <p>Выберите подходящий курс из {courses.length} программ обучения</p>
+            <div className={s.headerBadge}>
+              <span>Каталог программ</span>
+            </div>
+            <h1 className={s.pageTitle}>
+              <span className={s.titleLine}>Все курсы</span>
+              <span className={s.titleLine}>обучения</span>
+            </h1>
+            <p className={s.pageSubtitle}>
+              Выберите подходящую программу из {courses.length} премиальных курсов
+            </p>
           </div>
 
           {loading ? (
             <div className={s.loading}>
-              <p>Загрузка курсов...</p>
+              <div className={s.loadingSpinner}></div>
+              <p className={s.loadingText}>Загрузка курсов...</p>
             </div>
           ) : (
             <>
@@ -73,11 +87,23 @@ const AllCoursesPage = () => {
                     onClick={loadMoreCourses}
                     disabled={loadingMore}
                   >
-                    {loadingMore 
-                      ? 'Загрузка...' 
-                      : `Показать ещё`
-                    }
+                    {loadingMore ? (
+                      <>
+                        <span className={s.loadingSpinnerSmall}></span>
+                        <span>Загрузка...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Показать ещё курсы</span>
+                      </>
+                    )}
                   </button>
+                </div>
+              )}
+
+              {!hasMoreCourses && courses.length > 0 && (
+                <div className={s.allCoursesLoaded}>
+                  <p>Все курсы загружены</p>
                 </div>
               )}
             </>

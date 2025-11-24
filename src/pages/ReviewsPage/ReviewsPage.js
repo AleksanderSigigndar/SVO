@@ -17,7 +17,8 @@ const ReviewsPage = () => {
   useEffect(() => {
     const q = query(
       collection(db, 'reviews'),
-      where('isApproved', '==', true)
+      where('isApproved', '==', true),
+      orderBy('createdAt', 'desc')
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -36,15 +37,28 @@ const ReviewsPage = () => {
     <div className={styles.reviewsPage}>
       <Head/>
       <main className={styles.main}>
+        <div className={styles.backgroundElements}>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.floatingElement}></div>
+        </div>
         <div className={styles.container}>
           <div className={styles.pageHeader}>
-            <h1>Отзывы наших студентов</h1>
-            <p>Узнайте, что говорят о наших курсах</p>
+            <div className={styles.headerBadge}>
+              <span>Мнения студентов</span>
+            </div>
+            <h1 className={styles.pageTitle}>
+              <span className={styles.titleLine}>Отзывы</span>
+              <span className={styles.titleLine}>наших студентов</span>
+            </h1>
+            <p className={styles.pageSubtitle}>
+              Узнайте о реальном опыте обучения от выпускников наших курсов
+            </p>
           </div>
 
           {!currentUser ? (
             <div className={styles.authMessage}>
-              <p>Сначала авторизируйтесь, чтобы оставить отзыв</p>
+              <p>Авторизуйтесь, чтобы поделиться своим опытом обучения</p>
             </div>
           ) : (
             <div className={styles.reviewActions}>
@@ -52,7 +66,15 @@ const ReviewsPage = () => {
                 className={styles.addReviewBtn}
                 onClick={() => setShowForm(!showForm)}
               >
-                {showForm ? 'Отменить' : 'Оставить отзыв'}
+                {showForm ? (
+                  <>
+                    <span>Отменить</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Оставить отзыв</span>
+                  </>
+                )}
               </button>
             </div>
           )}
@@ -63,14 +85,21 @@ const ReviewsPage = () => {
 
           <div className={styles.reviewsList}>
             {loading ? (
-              <div className={styles.loading}>Загрузка отзывов...</div>
+              <div className={styles.loading}>
+                <div className={styles.loadingSpinner}></div>
+                <p>Загрузка отзывов...</p>
+              </div>
             ) : reviews.length === 0 ? (
               <div className={styles.noReviews}>
                 <p>Пока нет отзывов. Будьте первым!</p>
               </div>
             ) : (
-              reviews.map(review => (
-                <ReviewCard key={review.id} review={review} />
+              reviews.map((review, index) => (
+                <ReviewCard 
+                  key={review.id} 
+                  review={review}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                />
               ))
             )}
           </div>

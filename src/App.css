@@ -254,11 +254,11 @@ p {
 }
 
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(135deg, #f8f4ff, #f0e6ff);
+  background: linear-gradient(135deg, #7b3fe1, #f0e6ff);
 }
 
 ::-webkit-scrollbar-thumb {

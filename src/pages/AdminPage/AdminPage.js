@@ -74,81 +74,111 @@ const AdminPage = () => {
     <div className={styles.adminPage}>
       <Head />
       <main className={styles.main}>
+        <div className={styles.backgroundElements}>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.floatingElement}></div>
+        </div>
         <div className={styles.container}>
           <div className={styles.adminContainer}>
-            <h1>Панель администратора</h1>
-            <p>Управление отзывами пользователей</p>
+            <div className={styles.adminHeader}>
+              <div className={styles.headerBadge}>
+                <span>Административная панель</span>
+              </div>
+              <h1 className={styles.pageTitle}>
+                <span className={styles.titleLine}>Управление</span>
+                <span className={styles.titleLine}>отзывами</span>
+              </h1>
+              <p className={styles.pageSubtitle}>
+                Модерация и управление отзывами пользователей
+              </p>
+            </div>
 
             <div className={styles.tabs}>
               <button 
                 className={`${styles.tab} ${activeTab === 'pending' ? styles.active : ''}`}
                 onClick={() => setActiveTab('pending')}
               >
-                На модерации ({pendingReviews.length})
+                <span className={styles.tabText}>На модерации</span>
+                <span className={styles.tabCount}>{pendingReviews.length}</span>
               </button>
               <button 
                 className={`${styles.tab} ${activeTab === 'approved' ? styles.active : ''}`}
                 onClick={() => setActiveTab('approved')}
               >
-                Опубликованные ({approvedReviews.length})
+                <span className={styles.tabText}>Опубликованные</span>
+                <span className={styles.tabCount}>{approvedReviews.length}</span>
               </button>
             </div>
 
             {loading ? (
-              <div className={styles.loading}>Загрузка отзывов...</div>
+              <div className={styles.loading}>
+                <div className={styles.loadingSpinner}></div>
+                <p>Загрузка отзывов...</p>
+              </div>
             ) : (
               <div className={styles.reviewsList}>
-                {(activeTab === 'pending' ? pendingReviews : approvedReviews).map(review => (
-                  <div key={review.id} className={styles.adminReviewCard}>
-                    <div className={styles.reviewHeader}>
-                      <div className={styles.reviewerInfo}>
-                        <strong>
-                          {review.isAnonymous ? 'Аноним' : `${review.lastName} ${review.firstName}`}
-                        </strong>
-                        <span className={styles.userEmail}>({review.userEmail})</span>
-                        {review.course && (
-                          <span className={styles.course}>Курс: {review.course}</span>
+                {(activeTab === 'pending' ? pendingReviews : approvedReviews).map((review, index) => (
+                  <div 
+                    key={review.id} 
+                    className={styles.adminReviewCard}
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className={styles.cardBackground}></div>
+                    <div className={styles.cardContent}>
+                      <div className={styles.reviewHeader}>
+                        <div className={styles.reviewerInfo}>
+                          <div className={styles.nameSection}>
+                            <strong className={styles.reviewerName}>
+                              {review.isAnonymous ? 'Аноним' : `${review.lastName} ${review.firstName}`}
+                            </strong>
+                            <span className={styles.userEmail}>{review.userEmail}</span>
+                          </div>
+                          {review.course && (
+                            <span className={styles.course}>Курс: {review.course}</span>
+                          )}
+                        </div>
+                        <div className={styles.reviewMeta}>
+                          <span className={styles.rating}>★ {review.rating}/5</span>
+                          <span className={styles.date}>
+                            {review.createdAt?.toDate().toLocaleDateString('ru-RU')}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className={styles.reviewText}>
+                        {review.text}
+                      </div>
+
+                      <div className={styles.adminActions}>
+                        {activeTab === 'pending' && (
+                          <>
+                            <button 
+                              className={styles.approveBtn}
+                              onClick={() => approveReview(review.id)}
+                            >
+                              <span>Одобрить</span>
+                            </button>
+                            <button 
+                              className={styles.rejectBtn}
+                              onClick={() => rejectReview(review.id)}
+                            >
+                              <span>Удалить</span>
+                            </button>
+                          </>
+                        )}
+
+                        {activeTab === 'approved' && (
+                          <button 
+                            className={styles.rejectBtn}
+                            onClick={() => rejectReview(review.id)}
+                          >
+                            <span>Удалить</span>
+                          </button>
                         )}
                       </div>
-                      <div className={styles.reviewMeta}>
-                        <span className={styles.rating}>☆ {review.rating}/5</span>
-                        <span className={styles.date}>
-                          {review.createdAt?.toDate().toLocaleDateString('ru-RU')}
-                        </span>
-                      </div>
                     </div>
-                    
-                    <div className={styles.reviewText}>
-                      {review.text}
-                    </div>
-
-                    {activeTab === 'pending' && (
-                      <div className={styles.adminActions}>
-                        <button 
-                          className={styles.approveBtn}
-                          onClick={() => approveReview(review.id)}
-                        >
-                          Одобрить
-                        </button>
-                        <button 
-                          className={styles.rejectBtn}
-                          onClick={() => rejectReview(review.id)}
-                        >
-                          Удалить
-                        </button>
-                      </div>
-                    )}
-
-                    {activeTab === 'approved' && (
-                      <div className={styles.adminActions}>
-                        <button 
-                          className={styles.rejectBtn}
-                          onClick={() => rejectReview(review.id)}
-                        >
-                          Удалить
-                        </button>
-                      </div>
-                    )}
+                    <div className={styles.cardHoverEffect}></div>
                   </div>
                 ))}
               </div>

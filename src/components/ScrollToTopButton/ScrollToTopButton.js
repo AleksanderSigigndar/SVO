@@ -51,7 +51,8 @@ const ScrollToTopButton = () => {
       onClick={scrollToTop}
       aria-label="Наверх"
     >
-      ↑
+      <span className={styles.arrowIcon}>↑</span>
+      <div className={styles.buttonGlow}></div>
     </button>
   );
 };

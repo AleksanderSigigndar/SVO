@@ -42,31 +42,54 @@ const LoginPage = () => {
     <div className={styles.loginPage}>
       <Head />
       <main className={styles.main}>
+        <div className={styles.backgroundElements}>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.floatingElement}></div>
+        </div>
         <div className={styles.container}>
           <div className={styles.formContainer}>
-            <h1>Вход в аккаунт</h1>
-            {error && <div className={styles.error}>{error}</div>}
+            <div className={styles.formHeader}>
+              <div className={styles.headerBadge}>
+                <span>Авторизация</span>
+              </div>
+              <h1 className={styles.pageTitle}>
+                <span className={styles.titleLine}>Вход в</span>
+                <span className={styles.titleLine}>аккаунт</span>
+              </h1>
+            </div>
+            
+            {error && (
+              <div className={styles.error}>
+                <span className={styles.errorIcon}>⚠</span>
+                {error}
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formGroup}>
-                <label>Email</label>
+                <label className={styles.inputLabel}>Email</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  className={styles.formInput}
+                  placeholder="your@email.com"
                 />
               </div>
 
               <div className={styles.formGroup}>
-                <label>Пароль</label>
+                <label className={styles.inputLabel}>Пароль</label>
                 <input
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   required
+                  className={styles.formInput}
+                  placeholder="••••••••"
                 />
               </div>
 
@@ -75,12 +98,24 @@ const LoginPage = () => {
                 className={styles.submitBtn}
                 disabled={loading}
               >
-                {loading ? 'Вход...' : 'Войти'}
+                {loading ? (
+                  <>
+                    <span className={styles.loadingSpinner}></span>
+                    <span>Вход...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Войти в аккаунт</span>
+                  </>
+                )}
               </button>
             </form>
 
             <div className={styles.registerLink}>
-              Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+              <span>Нет аккаунта?</span>
+              <Link to="/register" className={styles.registerButton}>
+                <span>Создать аккаунт</span>
+              </Link>
             </div>
           </div>
         </div>

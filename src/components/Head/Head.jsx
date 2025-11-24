@@ -74,7 +74,6 @@ const Head = () => {
               <>
                 {isAdmin && (
                   <Link to="/admin" className={s.authItem}>
-                    <span className={s.authIcon}>👑</span>
                     Админ
                   </Link>
                 )}

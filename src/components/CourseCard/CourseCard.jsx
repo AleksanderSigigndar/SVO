@@ -12,27 +12,50 @@ const CourseCard = ({ course }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
-    <div className={s.courseCard}>
-      <div className={s.courseCategory}>{course.category}</div>
-      <h3 className={s.courseTitle}>{course.title}</h3>
-      <p className={s.courseDescription}>{course.description}</p>
-      <div className={s.courseDetails}>
-        <span className={s.duration}>⏱ {course.duration}</span>
-        <span className={s.rating}>☆ {course.rating}</span>
-        <span className={s.students}>👥 {course.students}</span>
+      <div className={s.courseCard}>
+        <div className={s.cardBackground}></div>
+        <div className={s.cardContent}>
+          <div className={s.courseCategory}>{course.category}</div>
+          <h3 className={s.courseTitle}>{course.title}</h3>
+          <p className={s.courseDescription}>{course.description}</p>
+          <div className={s.courseDetails}>
+            <div className={s.detailItem}>
+              <span className={s.detailLabel}>Длительность:</span>
+              <span className={s.detailValue}>{course.duration}</span>
+            </div>
+            <div className={s.detailItem}>
+              <span className={s.detailLabel}>Рейтинг:</span>
+              <span className={s.detailValue}>{course.rating}</span>
+            </div>
+          </div>
+          <div className={s.cardFooter}>
+            <div className={s.priceSection}>
+              <span className={s.priceValue}>{course.price}</span>
+              <span className={s.pricePeriod}>/месяц</span>
+            </div>
+            <button className={s.enrollButton} onClick={openModal}>
+              <span className={s.buttonText}>Подать заявку</span>
+            </button>
+          </div>
+        </div>
+        <div className={s.cardHoverEffect}></div>
       </div>
-      <div className={s.coursePrice}>{course.price}/мес.</div>
-      <button className={s.btnCourse} onClick={openModal}>Подать заявку</button>
-    </div>
-    
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-      <p>Подробнее о курсе "{course.title}" можно узнать по номеру телефона</p>
-      <p style={{ fontSize: '1.4rem', fontWeight: 'bold', color: '#c494ff', marginTop: '1rem' }}>
-        +7(999)999-99-99
-      </p>
+        <div className={s.modalContent}>
+          <h3 className={s.modalTitle}>Курс "{course.title}"</h3>
+          <p className={s.modalText}>
+            Подробную информацию о курсе и подачу заявки можно оформить 
+            по указанному номеру телефона
+          </p>
+          <div className={s.contactInfo}>
+            <div className={s.phoneNumber}>+7 (999) 999-99-99</div>
+            <div className={s.contactNote}>Консультация бесплатная</div>
+          </div>
+        </div>
       </Modal>
     </>
   );

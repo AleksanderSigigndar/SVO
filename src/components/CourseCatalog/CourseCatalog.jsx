@@ -122,7 +122,6 @@ const CourseCatalog = () => {
                     onClick={() => openModal(course)}
                   >
                     <span className={s.buttonText}>Подробнее</span>
-                    <span className={s.buttonArrow}>→</span>
                   </button>
                 </div>
                 <div className={s.cardHoverEffect}></div>
@@ -133,7 +132,6 @@ const CourseCatalog = () => {
           <div className={s.actionsSection}>
             <button className={s.viewAllButton} onClick={goToAllCourses}>
               <span className={s.buttonLabel}>Исследовать все курсы</span>
-              <span className={s.buttonIcon}>↗</span>
             </button>
           </div>
         </div>

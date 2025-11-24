@@ -36,7 +36,6 @@ const Hero = () => {
           <div className={s.heroButtons}>
             <button className={s.ctaButton} onClick={goToAllCourses}>
               <span className={s.buttonText}>Начать обучение</span>
-              <span className={s.buttonIcon}>→</span>
             </button>
           </div>
           <div className={s.statsGrid}>

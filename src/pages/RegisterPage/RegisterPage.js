@@ -58,76 +58,108 @@ const RegisterPage = () => {
     <div className={styles.registerPage}>
       <Head />
       <main className={styles.main}>
+        <div className={styles.backgroundElements}>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.floatingElement}></div>
+        </div>
         <div className={styles.container}>
           <div className={styles.formContainer}>
-            <h1>Регистрация</h1>
-            {error && <div className={styles.error}>{error}</div>}
+            <div className={styles.formHeader}>
+              <div className={styles.headerBadge}>
+                <span>Создание аккаунта</span>
+              </div>
+              <h1 className={styles.pageTitle}>
+                <span className={styles.titleLine}>Регистрация</span>
+              </h1>
+            </div>
+            
+            {error && (
+              <div className={styles.error}>
+                {error}
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className={styles.form}>
-              <div className={styles.formGroup}>
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              <div className={styles.formGrid}>
+                <div className={styles.formGroup}>
+                  <label className={styles.inputLabel}>Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className={styles.formInput}
+                    placeholder="your@email.com"
+                  />
+                </div>
 
-              <div className={styles.formGroup}>
-                <label>Пароль</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                <div className={styles.formGroup}>
+                  <label className={styles.inputLabel}>Пароль</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    className={styles.formInput}
+                    placeholder="••••••••"
+                  />
+                  <span className={styles.helpText}>Минимум 6 символов</span>
+                </div>
 
-              <div className={styles.formGroup}>
-                <label>Подтвердите пароль</label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                <div className={styles.formGroup}>
+                  <label className={styles.inputLabel}>Подтвердите пароль</label>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    required
+                    className={styles.formInput}
+                    placeholder="••••••••"
+                  />
+                </div>
 
-              <div className={styles.formGroup}>
-                <label>Имя</label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                <div className={styles.formGroup}>
+                  <label className={styles.inputLabel}>Имя</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                    className={styles.formInput}
+                    placeholder="Ваше имя"
+                  />
+                </div>
 
-              <div className={styles.formGroup}>
-                <label>Фамилия</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                <div className={styles.formGroup}>
+                  <label className={styles.inputLabel}>Фамилия</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                    className={styles.formInput}
+                    placeholder="Ваша фамилия"
+                  />
+                </div>
 
-              <div className={styles.formGroup}>
-                <label>Телефон</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
+                <div className={styles.formGroup}>
+                  <label className={styles.inputLabel}>Телефон</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className={styles.formInput}
+                    placeholder="+7 (XXX) XXX-XX-XX"
+                  />
+                </div>
               </div>
 
               <button 
@@ -135,12 +167,24 @@ const RegisterPage = () => {
                 className={styles.submitBtn}
                 disabled={loading}
               >
-                {loading ? 'Регистрация...' : 'Зарегистрироваться'}
+                {loading ? (
+                  <>
+                    <span className={styles.loadingSpinner}></span>
+                    <span>Регистрация...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Создать аккаунт</span>
+                  </>
+                )}
               </button>
             </form>
 
             <div className={styles.loginLink}>
-              Уже есть аккаунт? <Link to="/login">Войти</Link>
+              <span>Уже есть аккаунт?</span>
+              <Link to="/login" className={styles.loginButton}>
+                <span>Войти в аккаунт</span>
+              </Link>
             </div>
           </div>
         </div>

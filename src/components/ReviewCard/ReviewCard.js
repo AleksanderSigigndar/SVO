@@ -13,7 +13,7 @@ const ReviewCard = ({ review }) => {
   };
 
   const renderStars = (rating) => {
-    return '☆'.repeat(rating);
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   };
   
   const formatLongWords = (text) => {
@@ -26,21 +26,25 @@ const ReviewCard = ({ review }) => {
 
   return (
     <div className={styles.reviewCard}>
-      <div className={styles.reviewHeader}>
-        <div className={styles.reviewerInfo}>
-          <span className={styles.reviewerName}>{displayName}</span>
-          {review.course && (
-            <span className={styles.course}>Курс: {review.course}</span>
-          )}
+      <div className={styles.cardBackground}></div>
+      <div className={styles.cardContent}>
+        <div className={styles.reviewHeader}>
+          <div className={styles.reviewerInfo}>
+            <span className={styles.reviewerName}>{displayName}</span>
+            {review.course && (
+              <span className={styles.course}>Курс: {review.course}</span>
+            )}
+          </div>
+          <div className={styles.reviewMeta}>
+            <span className={styles.rating}>{renderStars(review.rating)}</span>
+            <span className={styles.date}>{formatDate(review.createdAt)}</span>
+          </div>
         </div>
-        <div className={styles.reviewMeta}>
-          <span className={styles.rating}>{renderStars(review.rating)}</span>
-          <span className={styles.date}>{formatDate(review.createdAt)}</span>
+        <div className={styles.reviewText}>
+          {formatLongWords(review.text)}
         </div>
       </div>
-      <div className={styles.reviewText}>
-         {formatLongWords(review.text)}
-      </div>
+      <div className={styles.cardHoverEffect}></div>
     </div>
   );
 };

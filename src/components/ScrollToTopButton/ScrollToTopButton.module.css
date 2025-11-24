@@ -5,14 +5,18 @@
   width: 60px;
   height: 60px;
   border: none;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ead9ff 0%, #d981ff 50%, #c494ff 100%);
-  color: white;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.8rem;
   cursor: pointer;
   box-shadow: 
-    0 8px 25px rgba(196, 148, 255, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   display: flex;
@@ -21,125 +25,131 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px) scale(0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
 .scrollToTop::before {
   content: '';
   position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background: linear-gradient(135deg, #ead9ff, #d981ff, #c494ff);
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0;
-  transition: all 0.4s ease;
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-.scrollToTop::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, rgba(221, 154, 250, 0.1), rgba(196, 148, 255, 0.05));
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
+  border-radius: 18px;
 }
 
 .scrollToTop.visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
-  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: buttonAppear 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .scrollToTop:hover {
-  background: linear-gradient(135deg, #ffffff 0%, #f0e6ff 50%, #ead9ff 100%);
-  color: #c494ff;
-  transform: translateY(-5px) scale(1.1);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(221, 154, 250, 0.3);
+  color: #ffffff;
+  transform: translateY(-5px) scale(1.05);
   box-shadow: 
-    0 15px 35px rgba(196, 148, 255, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(221, 154, 250, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .scrollToTop:hover::before {
-  opacity: 0.3;
-  top: -8px;
-  left: -8px;
-  right: -8px;
-  bottom: -8px;
-}
-
-.scrollToTop:hover::after {
   opacity: 1;
 }
 
+.scrollToTop:hover .buttonGlow {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
 .scrollToTop:active {
-  background: linear-gradient(135deg, #c494ff 0%, #d981ff 50%, #ead9ff 100%);
-  color: white;
-  transform: translateY(-2px) scale(1.05);
+  background: rgba(221, 154, 250, 0.15);
+  border-color: rgba(221, 154, 250, 0.4);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 
-    0 5px 20px rgba(196, 148, 255, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(221, 154, 250, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.scrollToTop i {
-  transition: transform 0.3s ease;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.arrowIcon {
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  font-weight: 300;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.scrollToTop:hover i {
+.scrollToTop:hover .arrowIcon {
   transform: translateY(-2px);
+  text-shadow: 0 4px 12px rgba(221, 154, 250, 0.4);
 }
 
-.scrollToTop:active i {
-  transform: translateY(1px);
+.scrollToTop:active .arrowIcon {
+  transform: translateY(0);
 }
 
-@keyframes bounceIn {
+.buttonGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(221, 154, 250, 0.2), transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+@keyframes buttonAppear {
   0% {
     opacity: 0;
-    transform: translateY(20px) scale(0.3);
+    transform: translateY(20px) scale(0.3) rotate(-180deg);
   }
   50% {
     opacity: 0.7;
-    transform: translateY(-10px) scale(1.1);
+    transform: translateY(-10px) scale(1.1) rotate(10deg);
   }
   70% {
-    transform: translateY(5px) scale(0.9);
+    transform: translateY(5px) scale(0.95) rotate(-5deg);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1) rotate(0deg);
   }
 }
 
-@keyframes pulseGlow {
+@keyframes float {
   0%, 100% {
-    opacity: 0.2;
-    transform: scale(1);
+    transform: translateY(0px);
   }
   50% {
-    opacity: 0.4;
-    transform: scale(1.05);
+    transform: translateY(-5px);
   }
+}
+
+.scrollToTop.visible:not(:hover) {
+  animation: 
+    buttonAppear 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    float 3s ease-in-out 0.6s infinite;
 }
 
 .scrollToTop {
   transition: 
     opacity 0.5s ease,
     visibility 0.5s ease,
-    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 @media (max-width: 768px) {
@@ -149,10 +159,11 @@
     width: 55px;
     height: 55px;
     font-size: 1.6rem;
+    border-radius: 16px;
   }
   
   .scrollToTop:hover {
-    transform: translateY(-3px) scale(1.05);
+    transform: translateY(-3px) scale(1.03);
   }
 }
 
@@ -163,22 +174,56 @@
     width: 50px;
     height: 50px;
     font-size: 1.4rem;
+    border-radius: 14px;
   }
   
-  .scrollToTop::before {
-    animation: none;
+  .scrollToTop.visible:not(:hover) {
+    animation: buttonAppear 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
 
+/* Поддержка reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .scrollToTop,
-  .scrollToTop::before,
-  .scrollToTop i {
+  .scrollToTop.visible,
+  .arrowIcon,
+  .buttonGlow {
     animation: none !important;
-    transition: opacity 0.3s ease, visibility 0.3s ease !important;
+    transition: 
+      opacity 0.3s ease,
+      visibility 0.3s ease,
+      transform 0.3s ease !important;
   }
   
   .scrollToTop:hover {
     transform: translateY(-2px) !important;
   }
+  
+  .scrollToTop.visible:not(:hover) {
+    animation: none !important;
+  }
+}
+
+/* Темная тема для разных состояний */
+.scrollToTop:focus {
+  outline: none;
+  border-color: rgba(221, 154, 250, 0.5);
+  box-shadow: 
+    0 0 0 3px rgba(221, 154, 250, 0.2),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.scrollToTop:focus:not(:focus-visible) {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Плавное появление/исчезновение */
+.scrollToTop:not(.visible) {
+  transition: 
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    transform 0.3s ease !important;
 }

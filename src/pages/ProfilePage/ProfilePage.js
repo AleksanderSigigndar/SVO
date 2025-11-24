@@ -25,21 +25,13 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Отладочная информация
-  useEffect(() => {
-    console.log('ProfilePage - currentUser:', currentUser);
-    console.log('ProfilePage - userData:', userData);
-  }, [currentUser, userData]);
-
   useEffect(() => {
     if (!currentUser) {
-      console.log('No currentUser, redirecting to login');
       navigate('/login');
       return;
     }
 
     if (userData) {
-      console.log('Setting form data from userData:', userData);
       setFormData(prev => ({
         ...prev,
         firstName: userData.firstName || '',
@@ -52,11 +44,9 @@ const ProfilePage = () => {
     }
   }, [currentUser, userData, navigate]);
 
-  // Загружаем отзывы пользователя
   useEffect(() => {
     if (!currentUser) return;
 
-    console.log('Loading reviews for user:', currentUser.uid);
     const q = query(
       collection(db, 'reviews'),
       where('userId', '==', currentUser.uid),
@@ -68,7 +58,6 @@ const ProfilePage = () => {
       querySnapshot.forEach((doc) => {
         reviewsData.push({ id: doc.id, ...doc.data() });
       });
-      console.log('Loaded reviews:', reviewsData);
       setUserReviews(reviewsData);
       setReviewsLoading(false);
     }, (error) => {
@@ -108,7 +97,7 @@ const ProfilePage = () => {
         <Head />
         <main className={styles.main}>
           <div className={styles.container}>
-            <div className={styles.profileContainer}>
+            <div className={styles.accessDenied}>
               <h1>Доступ запрещен</h1>
               <p>Пожалуйста, войдите в систему чтобы получить доступ к личному кабинету.</p>
             </div>
@@ -123,12 +112,27 @@ const ProfilePage = () => {
     <div className={styles.profilePage}>
       <Head />
       <main className={styles.main}>
+        <div className={styles.backgroundElements}>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.geometricShape}></div>
+          <div className={styles.floatingElement}></div>
+        </div>
         <div className={styles.container}>
           <div className={styles.profileContainer}>
-            <h1>Личный кабинет</h1>
+            <div className={styles.profileHeader}>
+              <div className={styles.headerBadge}>
+                <span>Личный кабинет</span>
+              </div>
+              <h1 className={styles.pageTitle}>
+                <span className={styles.titleLine}>Мой профиль</span>
+              </h1>
+            </div>
             
             {message && (
               <div className={`${styles.message} ${message.includes('Ошибка') ? styles.error : styles.success}`}>
+                <span className={styles.messageIcon}>
+                  {message.includes('Ошибка') ? '⚠' : '✓'}
+                </span>
                 {message}
               </div>
             )}
@@ -136,7 +140,7 @@ const ProfilePage = () => {
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formGrid}>
                 <div className={styles.formGroup}>
-                  <label>Email</label>
+                  <label className={styles.inputLabel}>Email</label>
                   <input
                     type="email"
                     value={currentUser.email || ''}
@@ -147,55 +151,60 @@ const ProfilePage = () => {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Имя *</label>
+                  <label className={styles.inputLabel}>Имя *</label>
                   <input
                     type="text"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
                     required
+                    className={styles.formInput}
                   />
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Фамилия *</label>
+                  <label className={styles.inputLabel}>Фамилия *</label>
                   <input
                     type="text"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
                     required
+                    className={styles.formInput}
                   />
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Отчество</label>
+                  <label className={styles.inputLabel}>Отчество</label>
                   <input
                     type="text"
                     name="middleName"
                     value={formData.middleName}
                     onChange={handleChange}
+                    className={styles.formInput}
                   />
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Телефон *</label>
+                  <label className={styles.inputLabel}>Телефон *</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                     required
+                    className={styles.formInput}
                     placeholder="+7 (XXX) XXX-XX-XX"
                   />
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Пол</label>
+                  <label className={styles.inputLabel}>Пол</label>
                   <select 
                     name="gender" 
                     value={formData.gender} 
                     onChange={handleChange}
+                    className={styles.formSelect}
                   >
                     <option value="">Не указан</option>
                     <option value="male">Мужской</option>
@@ -204,12 +213,13 @@ const ProfilePage = () => {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Дата рождения</label>
+                  <label className={styles.inputLabel}>Дата рождения</label>
                   <input
                     type="date"
                     name="birthDate"
                     value={formData.birthDate}
                     onChange={handleChange}
+                    className={styles.formInput}
                   />
                 </div>
               </div>
@@ -219,27 +229,47 @@ const ProfilePage = () => {
                 className={styles.submitBtn}
                 disabled={loading}
               >
-                {loading ? 'Сохранение...' : 'Сохранить изменения'}
+                {loading ? (
+                  <>
+                    <span className={styles.loadingSpinner}></span>
+                    <span>Сохранение...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Сохранить изменения</span>
+                  </>
+                )}
               </button>
             </form>
 
-            {/* Секция с отзывами пользователя */}
             <div className={styles.reviewsSection}>
-              <h2>Мои отзывы</h2>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Мои отзывы</h2>
+                <div className={styles.reviewsCount}>
+                  {userReviews.length} отзывов
+                </div>
+              </div>
               
               {reviewsLoading ? (
-                <div className={styles.loading}>Загрузка отзывов...</div>
+                <div className={styles.loading}>
+                  <div className={styles.loadingSpinner}></div>
+                  <p>Загрузка отзывов...</p>
+                </div>
               ) : userReviews.length === 0 ? (
                 <div className={styles.noReviews}>
                   <p>У вас пока нет отзывов</p>
                 </div>
               ) : (
                 <div className={styles.userReviews}>
-                  {userReviews.map(review => (
-                    <div key={review.id} className={styles.userReviewItem}>
+                  {userReviews.map((review, index) => (
+                    <div 
+                      key={review.id} 
+                      className={styles.userReviewItem}
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
                       <ReviewCard review={review} />
-                      <div className={styles.reviewStatus}>
-                        Статус: {review.isApproved ? 'Опубликован' : 'На модерации'}
+                      <div className={`${styles.reviewStatus} ${review.isApproved ? styles.approved : styles.pending}`}>
+                        {review.isApproved ? 'Опубликован' : 'На модерации'}
                       </div>
                     </div>
                   ))}
