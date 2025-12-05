@@ -19,6 +19,9 @@ const Head = () => {
   const goToReviews = () => {
     navigate('/reviews');
   };
+  const goToApplicate = () => {
+    navigate('/applicate');
+  };
   const scrollToCourses = () => {
     scrollToElement('courses', 100);
   };
@@ -66,6 +69,10 @@ const Head = () => {
             <button className={s.navItem} onClick={goToReviews}>
               <span className={s.navIcon}></span>
               Отзывы
+            </button>
+            <button className={s.navItem} onClick={goToApplicate}>
+              <span className={s.navIcon}></span>
+              Заявка на курс
             </button>
           </div>
           

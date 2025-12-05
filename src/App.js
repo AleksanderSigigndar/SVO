@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import ReviewsPage from './pages/ReviewsPage/ReviewsPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import ApplicationPage from './pages/ApplicationPage/ApplicationPage';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/reviews" element={<ReviewsPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/applicate" element={<ApplicationPage />} />
         </Routes>
       </div>
     </AuthProvider>

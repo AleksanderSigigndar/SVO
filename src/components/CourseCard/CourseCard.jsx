@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import Modal from '../Modal/Modal';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import s from './CourseCard.module.css';
 
 const CourseCard = ({ course }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  
+  const navigate = useNavigate();
+  
+  const goToApplicate = () => {
+    navigate('/applicate');
   };
 
   return (
@@ -36,27 +33,13 @@ const CourseCard = ({ course }) => {
               <span className={s.priceValue}>{course.price}</span>
               <span className={s.pricePeriod}>/месяц</span>
             </div>
-            <button className={s.enrollButton} onClick={openModal}>
+            <button className={s.enrollButton} onClick={goToApplicate}>
               <span className={s.buttonText}>Подать заявку</span>
             </button>
           </div>
         </div>
         <div className={s.cardHoverEffect}></div>
       </div>
-
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <div className={s.modalContent}>
-          <h3 className={s.modalTitle}>Курс "{course.title}"</h3>
-          <p className={s.modalText}>
-            Подробную информацию о курсе и подачу заявки можно оформить 
-            по указанному номеру телефона
-          </p>
-          <div className={s.contactInfo}>
-            <div className={s.phoneNumber}>+7 (999) 999-99-99</div>
-            <div className={s.contactNote}>Консультация бесплатная</div>
-          </div>
-        </div>
-      </Modal>
     </>
   );
 };
