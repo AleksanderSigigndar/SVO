@@ -36,7 +36,6 @@ const Footer = () => {
             <nav className={s.footerNav}>
               <a href="#courses" className={s.navLink}>Все курсы</a>
               <a href="#features" className={s.navLink}>О платформе</a>
-              <a href="#reviews" className={s.navLink}>Отзывы</a>
             </nav>
           </div>
         </div>

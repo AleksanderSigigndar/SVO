@@ -54,18 +54,6 @@ const Head = () => {
         
         <nav className={s.nav}>
           <div className={s.navMain}>
-            {isHomePage && (
-              <>
-                <button className={s.navItem} onClick={scrollToCourses}>
-                  <span className={s.navIcon}></span>
-                  Курсы
-                </button>
-                <button className={s.navItem} onClick={scrollToFeatures}>
-                  <span className={s.navIcon}></span>
-                  Преимущества
-                </button>
-              </>
-            )}
             <button className={s.navItem} onClick={goToReviews}>
               <span className={s.navIcon}></span>
               Отзывы
