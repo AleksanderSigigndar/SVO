@@ -14,49 +14,6 @@
   position: relative;
 }
 
-.backgroundElements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.geometricShape {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(221, 154, 250, 0.05), transparent);
-  animation: floatShape 20s ease-in-out infinite;
-}
-
-.geometricShape:nth-child(1) {
-  top: 10%;
-  right: 5%;
-  width: 200px;
-  height: 200px;
-  animation-delay: 0s;
-}
-
-.geometricShape:nth-child(2) {
-  bottom: 20%;
-  left: 8%;
-  width: 150px;
-  height: 150px;
-  animation-delay: -10s;
-}
-
-.floatingElement {
-  position: absolute;
-  top: 40%;
-  right: 15%;
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, rgba(196, 148, 255, 0.03), rgba(221, 154, 250, 0.05));
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  animation: rotateFloat 20s linear infinite;
-}
-
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -199,7 +156,16 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  animation: fadeInUp 0.6s ease-out both;
 }
+
+.formGroup:nth-child(1) { animation-delay: 0.1s; }
+.formGroup:nth-child(2) { animation-delay: 0.2s; }
+.formGroup:nth-child(3) { animation-delay: 0.3s; }
+.formGroup:nth-child(4) { animation-delay: 0.4s; }
+.formGroup:nth-child(5) { animation-delay: 0.5s; }
+.formGroup:nth-child(6) { animation-delay: 0.6s; }
+.formGroup:nth-child(7) { animation-delay: 0.7s; }
 
 .inputLabel {
   font-weight: 600;
@@ -209,7 +175,8 @@
 }
 
 .formInput,
-.formSelect {
+.formSelect,
+.disabledInput {
   padding: 1rem 1.2rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -218,6 +185,7 @@
   color: rgba(255, 255, 255, 0.9);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
+  font-family: inherit;
 }
 
 .formInput::placeholder {
@@ -225,6 +193,49 @@
 }
 
 .formInput:focus,
+.formSelect:focus,
+.disabledInput:focus {
+  outline: none;
+  border-color: rgba(221, 154, 250, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(221, 154, 250, 0.2);
+  transform: translateY(-1px);
+}
+
+.formInput:hover:not(:disabled) {
+  border-color: rgba(221, 154, 250, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.disabledInput {
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.08);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.disabledInput:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  transform: none;
+}
+
+.formSelect {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23dd9afa' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 1rem) center;
+  background-size: 12px;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+
+.formSelect:hover {
+  border-color: rgba(221, 154, 250, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
 .formSelect:focus {
   outline: none;
   border-color: rgba(221, 154, 250, 0.5);
@@ -233,21 +244,62 @@
   transform: translateY(-1px);
 }
 
-.disabledInput {
-  background: rgba(255, 255, 255, 0.03) !important;
-  color: rgba(255, 255, 255, 0.4) !important;
-  cursor: not-allowed;
-  border-color: rgba(255, 255, 255, 0.05) !important;
+.formSelect option {
+  background: #2d1b4e;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border: none;
+  font-size: 1rem;
+}
+
+.formSelect option:hover {
+  background: rgba(221, 154, 250, 0.2);
+}
+
+.formSelect option:checked {
+  background: rgba(221, 154, 250, 0.3);
+  color: #ffffff;
+}
+
+.formSelect::-ms-expand {
+  display: none;
+}
+
+@supports (scrollbar-width: thin) {
+  .formSelect {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(221, 154, 250, 0.3) rgba(255, 255, 255, 0.05);
+  }
+}
+
+.formSelect::-webkit-scrollbar {
+  width: 8px;
+}
+
+.formSelect::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.formSelect::-webkit-scrollbar-thumb {
+  background: rgba(221, 154, 250, 0.3);
+  border-radius: 4px;
+}
+
+.formSelect::-webkit-scrollbar-thumb:hover {
+  background: rgba(221, 154, 250, 0.5);
 }
 
 .helpText {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.6);
   font-style: italic;
   background: rgba(255, 255, 255, 0.05);
   padding: 0.5rem 0.8rem;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
 }
 
 .submitBtn {
@@ -435,170 +487,6 @@
 .noReviews p {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
-}
-
-.formInput,
-.formSelect,
-.disabledInput {
-  padding: 1rem 1.2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(10px);
-  font-family: inherit;
-}
-
-.disabledInput {
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.7);
-  border-color: rgba(255, 255, 255, 0.08);
-  cursor: not-allowed;
-  opacity: 0.8;
-}
-
-.formSelect {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23dd9afa' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: calc(100% - 1rem) center;
-  background-size: 12px;
-  padding-right: 3rem;
-  cursor: pointer;
-}
-
-.formSelect:hover {
-  border-color: rgba(221, 154, 250, 0.3);
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.formSelect:focus {
-  outline: none;
-  border-color: rgba(221, 154, 250, 0.5);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 2px rgba(221, 154, 250, 0.2);
-  transform: translateY(-1px);
-}
-
-.formSelect option {
-  background: #2d1b4e;
-  color: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  border: none;
-  font-size: 1rem;
-}
-
-.formSelect option:hover {
-  background: rgba(221, 154, 250, 0.2);
-}
-
-.formSelect option:checked {
-  background: rgba(221, 154, 250, 0.3);
-  color: #ffffff;
-}
-
-.formSelect::-ms-expand {
-  display: none;
-}
-
-.formInput:focus,
-.formSelect:focus,
-.disabledInput:focus {
-  outline: none;
-  border-color: rgba(221, 154, 250, 0.5);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 2px rgba(221, 154, 250, 0.2);
-  transform: translateY(-1px);
-}
-
-.formInput::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.formInput:hover:not(:disabled) {
-  border-color: rgba(221, 154, 250, 0.3);
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.disabledInput:hover {
-  border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-  transform: none;
-}
-
-.helpText {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
-  font-style: italic;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.5rem 0.8rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  animation: fadeInUp 0.6s ease-out both;
-}
-
-.formGroup:nth-child(1) { animation-delay: 0.1s; }
-.formGroup:nth-child(2) { animation-delay: 0.2s; }
-.formGroup:nth-child(3) { animation-delay: 0.3s; }
-.formGroup:nth-child(4) { animation-delay: 0.4s; }
-.formGroup:nth-child(5) { animation-delay: 0.5s; }
-.formGroup:nth-child(6) { animation-delay: 0.6s; }
-.formGroup:nth-child(7) { animation-delay: 0.7s; }
-
-@supports (scrollbar-width: thin) {
-  .formSelect {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(221, 154, 250, 0.3) rgba(255, 255, 255, 0.05);
-  }
-}
-
-.formSelect::-webkit-scrollbar {
-  width: 8px;
-}
-
-.formSelect::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-.formSelect::-webkit-scrollbar-thumb {
-  background: rgba(221, 154, 250, 0.3);
-  border-radius: 4px;
-}
-
-.formSelect::-webkit-scrollbar-thumb:hover {
-  background: rgba(221, 154, 250, 0.5);
-}
-
-@keyframes floatShape {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-15px) rotate(120deg);
-  }
-  66% {
-    transform: translateY(8px) rotate(240deg);
-  }
-}
-
-@keyframes rotateFloat {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 @keyframes slideUpFade {

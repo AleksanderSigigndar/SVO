@@ -20,11 +20,9 @@ const AdminPage = () => {
   const { currentUser, isAdmin } = useAuth();
   const navigate = useNavigate();
   
-  // Состояние для отзывов
   const [reviews, setReviews] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
   
-  // Состояние для заявок
   const [applications, setApplications] = useState([]);
   const [applicationsLoading, setApplicationsLoading] = useState(true);
   
@@ -44,7 +42,6 @@ const AdminPage = () => {
     }
   }, [currentUser, isAdmin, navigate]);
 
-  // Загрузка отзывов
   useEffect(() => {
     const q = query(
       collection(db, 'reviews'),
@@ -63,7 +60,6 @@ const AdminPage = () => {
     return unsubscribe;
   }, []);
 
-  // Загрузка заявок
   useEffect(() => {
     const q = query(
       collection(db, 'applications'),
@@ -82,7 +78,6 @@ const AdminPage = () => {
     return unsubscribe;
   }, []);
 
-  // Обработчики для отзывов
   const approveReview = async (reviewId) => {
     try {
       await updateDoc(doc(db, 'reviews', reviewId), {
@@ -102,7 +97,6 @@ const AdminPage = () => {
     }
   };
 
-  // Обработчики для заявок
   const approveApplication = async (appId) => {
     try {
       await updateDoc(doc(db, 'applications', appId), {
@@ -130,16 +124,13 @@ const AdminPage = () => {
     }
   };
 
-  // Фильтрация отзывов
   const pendingReviews = reviews.filter(review => !review.isApproved);
   const approvedReviews = reviews.filter(review => review.isApproved);
 
-  // Фильтрация заявок
   const pendingApplications = applications.filter(app => app.status === 'pending');
   const approvedApplications = applications.filter(app => app.status === 'approved');
   const rejectedApplications = applications.filter(app => app.status === 'rejected');
 
-  // Функция для получения статуса заявки
   const getApplicationStatus = (status) => {
     switch (status) {
       case 'pending': return { text: 'На рассмотрении', className: styles.statusPending };
@@ -149,7 +140,6 @@ const AdminPage = () => {
     }
   };
 
-  // Функция для получения способа оплаты
   const getPaymentMethod = (method) => {
     return method === 'card' ? 'Картой' : 'Наличные';
   };
@@ -181,7 +171,6 @@ const AdminPage = () => {
               </p>
             </div>
 
-            {/* Основные табы */}
             <div className={styles.mainTabs}>
               <button 
                 className={`${styles.mainTab} ${activeTab === 'reviews' ? styles.active : ''}`}
@@ -199,7 +188,6 @@ const AdminPage = () => {
               </button>
             </div>
 
-            {/* Секция отзывов */}
             {activeTab === 'reviews' && (
               <>
                 <div className={styles.subTabs}>
@@ -306,7 +294,6 @@ const AdminPage = () => {
               </>
             )}
 
-            {/* Секция заявок */}
             {activeTab === 'applications' && (
               <>
                 <div className={styles.subTabs}>

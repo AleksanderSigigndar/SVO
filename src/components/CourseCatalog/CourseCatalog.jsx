@@ -107,7 +107,7 @@ const CourseCatalog = () => {
                 <h3 className={s.courseTitle}>{course.title}</h3>
                 <div className={s.courseMeta}>
                   <div className={s.metaItem}>
-                    <span className={s.metaIcon}>⏱</span>
+                    <span className={s.metaIcon}></span>
                     <span className={s.metaText}>{course.duration}</span>
                   </div>
                 </div>

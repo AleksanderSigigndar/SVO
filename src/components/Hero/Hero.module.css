@@ -10,86 +10,6 @@
   align-items: center;
 }
 
-.geometricBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.geometricShape1 {
-  position: absolute;
-  top: 10%;
-  right: 5%;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, #dd9afa33, #c494ff66);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  animation: floatRotate 20s ease-in-out infinite;
-}
-
-.geometricShape2 {
-  position: absolute;
-  bottom: 15%;
-  left: 8%;
-  width: 200px;
-  height: 200px;
-  background: linear-gradient(135deg, #d981ff40, #ead9ff33);
-  clip-path: circle(50% at 50% 50%);
-  animation: pulseShape 8s ease-in-out infinite;
-}
-
-.geometricShape3 {
-  position: absolute;
-  top: 40%;
-  left: 15%;
-  width: 150px;
-  height: 150px;
-  background: linear-gradient(135deg, #c494ff4d, #dd9afa33);
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transform: rotate(45deg);
-  animation: slideDiagonal 15s ease-in-out infinite;
-}
-
-.floatingOrbs {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, #dd9afa, transparent);
-  animation: floatOrb 25s linear infinite;
-}
-
-.orb:nth-child(1) {
-  width: 80px;
-  height: 80px;
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.orb:nth-child(2) {
-  width: 120px;
-  height: 120px;
-  top: 60%;
-  right: 15%;
-  animation-delay: -8s;
-}
-
-.orb:nth-child(3) {
-  width: 60px;
-  height: 60px;
-  bottom: 25%;
-  left: 20%;
-  animation-delay: -15s;
-}
-
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -289,62 +209,6 @@
   letter-spacing: 0.5px;
 }
 
-@keyframes floatRotate {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-30px) rotate(120deg);
-  }
-  66% {
-    transform: translateY(15px) rotate(240deg);
-  }
-}
-
-@keyframes pulseShape {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-}
-
-@keyframes slideDiagonal {
-  0%, 100% {
-    transform: translate(0, 0) rotate(45deg);
-  }
-  25% {
-    transform: translate(20px, -20px) rotate(45deg);
-  }
-  50% {
-    transform: translate(-15px, 15px) rotate(45deg);
-  }
-  75% {
-    transform: translate(10px, -10px) rotate(45deg);
-  }
-}
-
-@keyframes floatOrb {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(100px, -50px) rotate(90deg);
-  }
-  50% {
-    transform: translate(50px, 100px) rotate(180deg);
-  }
-  75% {
-    transform: translate(-100px, 50px) rotate(270deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(360deg);
-  }
-}
-
 @keyframes slideUpFade {
   from {
     opacity: 0;
@@ -421,16 +285,6 @@
   .ctaButton {
     padding: 1.2rem 2.5rem;
     font-size: 1.1rem;
-  }
-  
-  .geometricShape1 {
-    width: 200px;
-    height: 200px;
-  }
-  
-  .geometricShape2 {
-    width: 150px;
-    height: 150px;
   }
 }
 

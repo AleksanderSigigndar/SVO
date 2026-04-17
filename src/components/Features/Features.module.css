@@ -8,50 +8,6 @@
   align-items: center;
 }
 
-.backgroundElements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.geometricShape {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(221, 154, 250, 0.1), transparent);
-  animation: floatShape 25s ease-in-out infinite;
-}
-
-.geometricShape:nth-child(1) {
-  top: 15%;
-  left: 5%;
-  width: 180px;
-  height: 180px;
-  animation-delay: 0s;
-}
-
-.geometricShape:nth-child(2) {
-  bottom: 20%;
-  right: 8%;
-  width: 220px;
-  height: 220px;
-  animation-delay: -10s;
-}
-
-.floatingOrb {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, rgba(196, 148, 255, 0.05), rgba(221, 154, 250, 0.1));
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  animation: rotateOrb 20s linear infinite;
-}
-
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -229,27 +185,6 @@
 
 .featureCard:hover .featureDescription {
   color: rgba(255, 255, 255, 0.9);
-}
-
-@keyframes floatShape {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-25px) rotate(120deg);
-  }
-  66% {
-    transform: translateY(15px) rotate(240deg);
-  }
-}
-
-@keyframes rotateOrb {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
 }
 
 @keyframes slideUpFade {
