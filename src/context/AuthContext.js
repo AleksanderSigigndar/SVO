@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const ADMIN_EMAIL = "smitAdmin@l.com";
+  const ADMIN_EMAIL = "admin@mail.com";
 
   const signup = async (email, password, userData) => {
     try {

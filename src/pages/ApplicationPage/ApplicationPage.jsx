@@ -14,6 +14,7 @@ const ApplicationPage = () => {
   const [message, setMessage] = useState('');
   const [userApplications, setUserApplications] = useState([]);
   const [applicationsLoading, setApplicationsLoading] = useState(true);
+  const [phoneError, setPhoneError] = useState('');
   
   // Список доступных курсов
   const availableCourses = [
@@ -32,6 +33,26 @@ const ApplicationPage = () => {
     course: '',
     paymentMethod: 'cash'
   });
+
+  // Функция валидации номера телефона
+  const validatePhone = (phone) => {
+    const phoneRegex = /^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$/;
+    return phoneRegex.test(phone);
+  };
+
+  // Функция форматирования телефона
+  const formatPhone = (value) => {
+    const numbers = value.replace(/\D/g, '');
+    if (numbers.length === 0) return '';
+    
+    let formatted = '+7';
+    if (numbers.length > 1) formatted += ` (${numbers.substring(1, 4)}`;
+    if (numbers.length >= 5) formatted += `) ${numbers.substring(4, 7)}`;
+    if (numbers.length >= 8) formatted += `-${numbers.substring(7, 9)}`;
+    if (numbers.length >= 10) formatted += `-${numbers.substring(9, 11)}`;
+    
+    return formatted;
+  };
 
   useEffect(() => {
     if (!currentUser) {
@@ -75,16 +96,28 @@ const ApplicationPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    if (name === 'phone') {
+      const formatted = formatPhone(value);
+      setFormData(prev => ({ ...prev, [name]: formatted }));
+      if (formatted && !validatePhone(formatted)) {
+        setPhoneError('Неверный формат телефона');
+      } else {
+        setPhoneError('');
+      }
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+    setPhoneError('');
 
     if (!formData.firstName || !formData.lastName || !formData.phone || !formData.course) {
       setMessage('Пожалуйста, заполните все обязательные поля');
@@ -92,7 +125,8 @@ const ApplicationPage = () => {
       return;
     }
 
-    if (!formData.phone.match(/^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$/)) {
+    if (!validatePhone(formData.phone)) {
+      setPhoneError('Введите корректный номер телефона в формате +7 (XXX) XXX-XX-XX');
       setMessage('Введите корректный номер телефона в формате +7 (XXX) XXX-XX-XX');
       setLoading(false);
       return;
@@ -124,27 +158,6 @@ const ApplicationPage = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const formatPhone = (value) => {
-    const numbers = value.replace(/\D/g, '');
-    if (numbers.length === 0) return '';
-    
-    let formatted = '+7';
-    if (numbers.length > 1) formatted += ` (${numbers.substring(1, 4)}`;
-    if (numbers.length >= 5) formatted += `) ${numbers.substring(4, 7)}`;
-    if (numbers.length >= 8) formatted += `-${numbers.substring(7, 9)}`;
-    if (numbers.length >= 10) formatted += `-${numbers.substring(9, 11)}`;
-    
-    return formatted;
-  };
-
-  const handlePhoneChange = (e) => {
-    const formatted = formatPhone(e.target.value);
-    setFormData(prev => ({
-      ...prev,
-      phone: formatted
-    }));
   };
 
   const getStatusText = (status) => {
@@ -259,12 +272,13 @@ const ApplicationPage = () => {
                     type="tel"
                     name="phone"
                     value={formData.phone}
-                    onChange={handlePhoneChange}
+                    onChange={handleChange}
                     required
-                    className={styles.formInput}
+                    className={`${styles.formInput} ${phoneError ? styles.inputError : ''}`}
                     placeholder="+7 (XXX) XXX-XX-XX"
                     maxLength="18"
                   />
+                  {phoneError && <span className={styles.errorText}>{phoneError}</span>}
                   <span className={styles.helpText}>Формат: +7 (XXX) XXX-XX-XX</span>
                 </div>
 
@@ -278,7 +292,13 @@ const ApplicationPage = () => {
                     required
                     className={styles.formInput}
                     placeholder="Напишите название курса"
+                    list="courses"
                   />
+                  <datalist id="courses">
+                    {availableCourses.map(course => (
+                      <option key={course} value={course} />
+                    ))}
+                  </datalist>
                 </div>
 
                 <div className={styles.formGroup}>

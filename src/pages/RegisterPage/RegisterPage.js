@@ -20,11 +20,35 @@ const RegisterPage = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
 
+  // Функция валидации номера телефона
+  const validatePhone = (phone) => {
+    const phoneRegex = /^\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}$/;
+    return phoneRegex.test(phone);
+  };
+
+  // Функция форматирования телефона
+  const formatPhone = (value) => {
+    const numbers = value.replace(/\D/g, '');
+    if (numbers.length === 0) return '';
+    
+    let formatted = '+7';
+    if (numbers.length > 1) formatted += ` (${numbers.substring(1, 4)}`;
+    if (numbers.length >= 5) formatted += `) ${numbers.substring(4, 7)}`;
+    if (numbers.length >= 8) formatted += `-${numbers.substring(7, 9)}`;
+    if (numbers.length >= 10) formatted += `-${numbers.substring(9, 11)}`;
+    
+    return formatted;
+  };
+
   const handleChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value } = e.target;
+    
+    if (name === 'phone') {
+      const formatted = formatPhone(value);
+      setFormData(prev => ({ ...prev, [name]: formatted }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -37,6 +61,11 @@ const RegisterPage = () => {
 
     if (formData.password.length < 6) {
       return setError('Пароль должен содержать минимум 6 символов');
+    }
+
+    // Валидация телефона
+    if (formData.phone && !validatePhone(formData.phone)) {
+      return setError('Введите корректный номер телефона в формате +7 (XXX) XXX-XX-XX');
     }
 
     try {
@@ -158,7 +187,9 @@ const RegisterPage = () => {
                     required
                     className={styles.formInput}
                     placeholder="+7 (XXX) XXX-XX-XX"
+                    maxLength="18"
                   />
+                  <span className={styles.helpText}>Формат: +7 (XXX) XXX-XX-XX</span>
                 </div>
               </div>
 
